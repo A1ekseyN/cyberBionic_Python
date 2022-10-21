@@ -12,3 +12,4 @@ elif leap(year) == False:
     print(f"{year} - год не является високосным.")
 
 print('Hello')
+print('Hello World')
