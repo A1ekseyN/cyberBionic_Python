@@ -6,3 +6,4 @@ pickle.dump(a, open('03.json', 'wb'))
 
 b = pickle.load(open('03.json', 'rb'))
 print(b)
+print(type(b))

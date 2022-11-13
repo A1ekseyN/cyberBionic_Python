@@ -1,4 +1,4 @@
-from random import random, randint
+from random import randint
 
 
 print("logo")
@@ -38,7 +38,7 @@ def movie_rec():
 
 
     def rec_sys():
-        # Функция для рекомендации фильма
+        # Система для рекомендации фильма + дополнительное меню.
         movies = [
             ['Побег из Шоушенка', 9.2, 1994, 'Фрэнк Дарабонт', 'Драма'],
             ['Крестный отец', 9.2, 1972, 'Фрэнсис Форд Коппола', 'Детектив, Драма'],
@@ -52,33 +52,84 @@ def movie_rec():
             ['Джокер', 8.3, 2019, 'Тодд Филлипс', 'Детектив, Драмма, Триллер'],
             ['Дюна', 8.0, 2021, 'Дени Вильнёв', 'Эпическая фантастика'],
         ]
-        rnd_movie = randint(0, len(movies))
 
+        rnd_movie = randint(0, len(movies) - 1)
         print(f'\nРекомендую фильм: {movies[rnd_movie][0]}\nIMDb рейтинг: {movies[rnd_movie][1]}'
               f'\nГод выхода на экран: {movies[rnd_movie][2]}\nРежиссёр: {movies[rnd_movie][3]}'
               f'\nЖанр: {movies[rnd_movie][4]}')
 
-        # !!!
-        # Нужно переписать try в функцию, чтобы была рекурсия,и можно было использовать больше чем 2 попытки.
-        try:
-            ask = int(input('\n1. Отобразить еще один фильм\n2. Выйти в главное меню\n3. Выйти из программы\n>>> '))
-            if ask == 1:
-                rec_sys()
-            elif ask == 2:
-                menu()
-            else:
-                print('Что-то случилось. Нужно ввести 1 или 2.\nПотом, возможно, тут допишу код.')
-                pass
-        except:
-            print('А тут случилась какая-то ошибка. Нужно правильно ввводить цифры.')
-            pass
+
+        def movie_menu():
+            # Функция для меню
+            try:
+                ask = int(input('\n1. Отобразить еще один фильм\n2. Выйти в главное меню\n3. Выйти из программы\n>>> '))
+                if ask == 1:
+                    rec_sys()
+                elif ask == 2:
+                    menu()
+                elif ask == 3:
+                    print('\nВыход из программы.')
+                elif ask != 1 and ask != 2 and ask != 3:
+                    print('Нет, такого пункта меню, попробуйте еще раз.')
+                    movie_menu()
+                else:
+                    print('\nЧто-то случилось. Нужно ввести 1, 2 или 3.')
+            except ValueError:
+                print('\nОшибка типа вводимых данных. Попробуйте ввести цифры.')
+                movie_menu()
+
+        movie_menu()
 
     rec_sys()
 
 
 def music_rec():
     # Функция рекомендации музыки
-    pass
+    print('\nУчитывая рейтинг популярных песен, и свои предпочтения в музыке. Рекомендую песню: ')
+
+
+    def rec_sys():
+        # Система рекомендации музыки + дополнительное меню.
+        songs = [
+            ['Ariana Grande', 'Break up with your girlfried in bored', 2019],
+            ['Masked Wolf', 'Astronaut in the Ocean', 2019],
+            ['Selena Gomez', 'BoyFriend', 2020],
+            ['David Rawlings', 'Cumberland Gap', 2017],
+            ['Ooyy', 'Come 2gether', 2020],
+            ['Ooyy', 'Faded', 2018],
+            ['FanEOne', 'Bre Petrunko', 2020],
+            ['Halsey', 'Gasoline', 2015],
+            ['Dimitri Vegas & Like Mike vs Diplo Kid', 'Hey Baby', 2016],
+            ['Jerry Heil', 'Кохайтеся Чорнобриві', 2022],
+            ['Shahmen', 'Mark', 2015],
+        ]
+
+        rnd_music = randint(0, len(songs) - 1)
+        print(f'\nРекомендую песню: {songs[rnd_music][0]}\nИсполнителя: {songs[rnd_music][1]}'
+              f'\nДата выхода: {songs[rnd_music][2]}')
+
+        def music_menu():
+            # Функция для меню
+            try:
+                ask = int(input('\n1. Отобразить еще один трек\n2. Выйти в главное меню\n3. Выйти из программы\n>>> '))
+                if ask == 1:
+                    rec_sys()
+                elif ask == 2:
+                    menu()
+                elif ask == 3:
+                    print('\nВыход из программы.')
+                elif ask != 1 and ask != 2 and ask != 3:
+                    print('Нет, такого пункта меню, попробуйте еще раз.')
+                    music_menu()
+                else:
+                    print('\nЧто-то случилось. Нужно ввести 1, 2 или 3.')
+            except ValueError:
+                print('\nОшибка типа вводимых данных. Попробуйте ввести цифры.')
+                music_menu()
+
+        music_menu()
+
+    rec_sys()
 
 
 def game_rec():
