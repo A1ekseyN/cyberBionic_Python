@@ -1,13 +1,18 @@
 from random import randint
+from hello import *
+from joke import get_joke
+from exit import *
+from story import *
 
 
-print("logo")
-print("Привет. Я чат-бот. Могу предложить несколько варинтов для взаимодействия:")
+logo()
+hello()
+
 
 def menu():
     # Функция меню или навигации по программе.
     print('\nВыберите вариант: \n1. Порекомендовать фильм\n2. Порекомендовать музыку\n3. Порекомендовать игру за жанром'
-          '\n4. Рассказать анекдот\n5. Рассказать интересную историю\n6. Поиграть в игру.\n7. Выход')
+          '\n4. Рассказать анекдот\n5. Рассказать интересную историю\n6. Поиграть в игру\n7. Выход')
     try:
         menu_sub = int(input('\nВыберите раздел: \n>>> '))
     except:
@@ -36,8 +41,7 @@ def movie_rec():
     # Функция для рекомендации фильмов
     print('Учитывая рейтинг IMDb, и свои предпочтения, могу порекомендовать несколько фильмов.')
 
-
-    def rec_sys():
+    def movie_rec_sys():
         # Система для рекомендации фильма + дополнительное меню.
         movies = [
             ['Побег из Шоушенка', 9.2, 1994, 'Фрэнк Дарабонт', 'Драма'],
@@ -60,15 +64,16 @@ def movie_rec():
 
 
         def movie_menu():
-            # Функция для меню
+            # Функция меню раздела фильмов
             try:
                 ask = int(input('\n1. Отобразить еще один фильм\n2. Выйти в главное меню\n3. Выйти из программы\n>>> '))
                 if ask == 1:
-                    rec_sys()
+                    movie_rec_sys()
                 elif ask == 2:
                     menu()
                 elif ask == 3:
-                    print('\nВыход из программы.')
+                    exit_logo()
+                    exit()
                 elif ask != 1 and ask != 2 and ask != 3:
                     print('Нет, такого пункта меню, попробуйте еще раз.')
                     movie_menu()
@@ -80,7 +85,7 @@ def movie_rec():
 
         movie_menu()
 
-    rec_sys()
+    movie_rec_sys()
 
 
 def music_rec():
@@ -109,7 +114,7 @@ def music_rec():
               f'\nДата выхода: {songs[rnd_music][2]}')
 
         def music_menu():
-            # Функция для меню
+            # Функция меню раздела музыки
             try:
                 ask = int(input('\n1. Отобразить еще один трек\n2. Выйти в главное меню\n3. Выйти из программы\n>>> '))
                 if ask == 1:
@@ -117,7 +122,8 @@ def music_rec():
                 elif ask == 2:
                     menu()
                 elif ask == 3:
-                    print('\nВыход из программы.')
+                    exit_logo()
+                    exit()
                 elif ask != 1 and ask != 2 and ask != 3:
                     print('Нет, такого пункта меню, попробуйте еще раз.')
                     music_menu()
@@ -139,12 +145,56 @@ def game_rec():
 
 def joke():
     # Функция для рассказа шутки
-    pass
+    get_joke()
+
+    def joke_menu():
+        # Функция меню раздела шутки
+        try:
+            ask = int(input('\n1. Отобразить еще одну шутку\n2. Выйти в главное меню\n3. Выйти из программы\n>>> '))
+            if ask == 1:
+                joke()
+            elif ask == 2:
+                menu()
+            elif ask == 3:
+                exit_logo()
+                exit()
+            elif ask != 1 and ask != 2 and ask != 3:
+                print('Нет, такого пункта меню, попробуйте еще раз.')
+                joke_menu()
+            else:
+                print('\nЧто-то случилось. Нужно ввести 1, 2 или 3.')
+        except ValueError:
+            print('\nОшибка типа вводимых данных. Попробуйте ввести цифры.')
+            joke_menu()
+
+    joke_menu()
 
 
 def cool_story():
     # Функция для интересных историй
-    pass
+    story_random()
+
+    def story_menu():
+        # Функция меню раздела историй
+        try:
+            ask = int(input('\n1. Отобразить еще одну историю\n2. Выйти в главное меню\n3. Выйти из программы\n>>> '))
+            if ask == 1:
+                cool_story()
+            elif ask == 2:
+                menu()
+            elif ask == 3:
+                exit_logo()
+                exit()
+            elif ask != 1 and ask != 2 and ask != 3:
+                print('Нет, такого пункта меню, попробуйте еще раз.')
+                story_menu()
+            else:
+                print('\nЧто-то случилось. Нужно ввести 1, 2 или 3.')
+        except ValueError:
+            print('\nОшибка типа вводимых данных. Попробуйте ввести цифры.')
+            story_random()
+
+    story_menu()
 
 
 def game_choice():
