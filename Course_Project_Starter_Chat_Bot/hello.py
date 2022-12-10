@@ -1,6 +1,7 @@
 import art
 from colorama import Back, Fore, Style
 
+
 def logo():
     return print(art.text2art(f"Hello, my friend.", font="cybermedum"))
 

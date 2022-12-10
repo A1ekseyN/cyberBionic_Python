@@ -1,8 +1,17 @@
-from random import randint
 from hello import *
 from joke import get_joke
 from exit import *
 from story import *
+from game_recommendation import *
+from game_rock import *
+
+# Запуск игры Space Invaders
+#import sys
+#sys.path.append('./Space')
+#from Space import main
+
+#main.AlienInvasion()
+#main.ai.run_game()
 
 
 logo()
@@ -11,8 +20,8 @@ hello()
 
 def menu():
     # Функция меню или навигации по программе.
-    print('\nВыберите вариант: \n1. Порекомендовать фильм\n2. Порекомендовать музыку\n3. Порекомендовать игру за жанром'
-          '\n4. Рассказать анекдот\n5. Рассказать интересную историю\n6. Поиграть в игру\n7. Выход')
+    print('\nВыберите вариант меню: \n1. Порекомендовать фильм\n2. Порекомендовать музыку\n3. Порекомендовать игру за жанром'
+          '\n4. Рассказать анекдот\n5. Рассказать интересную историю\n6. Поиграть в игру (Камень-ножницы-бумага)\n7. Выход')
     try:
         menu_sub = int(input('\nВыберите раздел: \n>>> '))
     except:
@@ -32,7 +41,8 @@ def menu():
     elif menu_sub == 6:
         game_choice()
     elif menu_sub == 7:
-        print('\nЗавершение программы. До новой встречи.')
+        exit_logo()
+        exit()
     else:
         menu()
 
@@ -113,6 +123,7 @@ def music_rec():
         print(f'\nРекомендую песню: {songs[rnd_music][0]}\nИсполнителя: {songs[rnd_music][1]}'
               f'\nДата выхода: {songs[rnd_music][2]}')
 
+
         def music_menu():
             # Функция меню раздела музыки
             try:
@@ -140,7 +151,100 @@ def music_rec():
 
 def game_rec():
     # Функция рекомендация игр
-    pass
+    # print() Перенести в функцию
+    print('\n--- Система рекомендации игр за жанром. ---')
+    game_recommendation()
+
+
+    def game_menu_items():
+        return '\nВыберите жанр:' \
+               '\n1. Приключения\n2. Выживание\n3. MMORPG\n4. Шутер' \
+               '\n5. Гонки\n6. Стратегии\n7. RPG\n8. Вернуться в Главное меню\n9. Выход из программы'
+
+
+    def game_genre_recommendation():
+        try:
+            ask = int(input('\nВыберите жанр:\n>>> '))
+            if ask == 1:
+                rnd = randint(0, len(games_adventure) - 1)
+                print(f'\nВ жанре Приключения, рекомендую: {games_adventure[rnd][0]}'
+                      f'\nЖанр: {games_adventure[rnd][1]}\nГод выхода: {games_adventure[rnd][2]}')
+                print(game_menu_items())
+                game_genre_recommendation()
+            elif ask == 2:
+                rnd = randint(0, len(games_survival) - 1)
+                print(f'\nВ жанре "Выживание", рекомендую: {games_survival[rnd][0]}'
+                      f'\nЖанр: {games_survival[rnd][1]}\nГод выхода: {games_survival[rnd][2]}')
+                print(game_menu_items())
+                game_genre_recommendation()
+            elif ask == 3:
+                rnd = randint(0, len(games_mmo) - 1)
+                print(f'\nВ жанре "MMORPG", рекомендую: {games_mmo[rnd][0]}'
+                      f'\nЖанр: {games_mmo[rnd][1]}\nГод выхода: {games_mmo[rnd][2]}')
+                print(game_menu_items())
+                game_genre_recommendation()
+            elif ask == 4:
+                rnd = randint(0, len(games_shooter) - 1)
+                print(f'\nВ жанре "Шутер", рекомендую: {games_shooter[rnd][0]}'
+                      f'\nЖанр: {games_shooter[rnd][1]}\nГод выхода: {games_shooter[rnd][2]}')
+                print(game_menu_items())
+                game_genre_recommendation()
+            elif ask == 5:
+                rnd = randint(0, len(games_races) - 1)
+                print(f'\nВ жанре "Гонки", рекомендую: {games_races[rnd][0]}'
+                      f'\nЖанр: {games_races[rnd][1]}\nГод выхода: {games_races[rnd][2]}')
+                print(game_menu_items())
+                game_genre_recommendation()
+            elif ask == 6:
+                rnd = randint(0, len(games_strategy) - 1)
+                print(f'\nВ жанре "Стратегии", рекомендую: {games_strategy[rnd][0]}'
+                      f'\nЖанр: {games_strategy[rnd][1]}\nГод выхода: {games_strategy[rnd][2]}')
+                print(game_menu_items())
+                game_genre_recommendation()
+            elif ask == 7:
+                rnd = randint(0, len(games_rpg) - 1)
+                print(f'\nВ жанре "RPG", рекомендую: {games_rpg[rnd][0]}'
+                      f'\nЖанр: {games_rpg[rnd][1]}\nГод выхода: {games_rpg[rnd][2]}')
+                print(game_menu_items())
+                game_genre_recommendation()
+            elif ask == 8:
+                menu()
+            elif ask == 9:
+                exit_logo()
+                exit()
+            else:
+                print('\nПопробуйте выбрать цифры 1 - 9.\n')
+                game_genre_recommendation()
+        except:
+            print('\nПопробуйте еще раз. И введите цифры.\n')
+            game_genre_recommendation()
+
+
+    def game_rec_menu():
+        # Функция меню раздела с рекоммендацией игр.
+        try:
+            ask = int(input('\n1. Отобразить игру за случайным жанром\n2. Рекомендовать игру за жанром'
+                            '\n3. Выйти в главное меню\n4. Выйти из программы\n>>> '))
+            if ask == 1:
+                game_rec()
+            elif ask == 2:
+                print(game_menu_items())
+                game_genre_recommendation()
+            elif ask == 3:
+                menu()
+            elif ask == 4:
+                exit_logo()
+                exit()
+            elif ask != 1 and ask != 2 and ask != 3 and ask != 4:
+                print('\nНет, такого пункта меню, попробуйте еще раз.')
+                game_rec_menu()
+            else:
+                print('\nЧто-то случилось. Нужно ввести 1, 2 или 3.')
+        except ValueError:
+            print('\nОшибка типа вводимых данных. Попробуйте ввести цифры.')
+            game_rec_menu()
+
+    game_rec_menu()
 
 
 def joke():
@@ -199,7 +303,8 @@ def cool_story():
 
 def game_choice():
     # Функция для выбора игры
-    pass
+    game_rock()
+    menu()
 
 
 menu()
